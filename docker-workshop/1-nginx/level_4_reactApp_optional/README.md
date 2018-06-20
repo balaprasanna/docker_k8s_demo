@@ -1,13 +1,13 @@
 **INFO**
 
-There is a React App in `ui` folder.
-If you want to complete this stage your need to make sure you have create this directory
-`ui/build`
+There is a **React App** in `ui` folder.
+If you want to complete this stage your need to make sure you have this directory `ui/build`
 
-But how to create it. You have to do npm install inside that directory
-Here are the steps
-1. npm install --verbose
-2. npm run build
+But how to create it. You have to do `npm install` inside that directory.
+
+***Here are the steps***
+  1. npm install --verbose
+  2. npm run build
 
 ```
 $ npm run build
