@@ -1,3 +1,11 @@
+*Dockerfile commands*
+### [FROM](https://docs.docker.com/engine/reference/builder/#from)
+
+### [COPY](https://docs.docker.com/engine/reference/builder/#copy)
+
+For [more](https://docs.docker.com/engine/reference/builder/) about docker file.
+
+
 ### docker build
 ```
 docker build --no-cache -t my-custom-nginx:0.0.1 .
