@@ -11,6 +11,11 @@ For [more](https://docs.docker.com/engine/reference/builder/) about docker file.
 docker build --no-cache -t my-custom-nginx:0.0.1 .
 ```
 
+### list docker images
+```
+docker images
+```
+
 ### docker run
 ```
 docker run --name some-content-nginx -d -p 8080:80 my-custom-nginx:0.0.1
