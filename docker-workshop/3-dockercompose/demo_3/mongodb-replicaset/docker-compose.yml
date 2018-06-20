@@ -1,0 +1,62 @@
+version: '2'
+
+# After services are running connect to mongodb-primary and initialize the replica set:
+# > mongo localhost:27030
+# 
+# config = { _id: "rs0", members: [
+#    {_id: 0, host : "mongodb-primary:27017"},
+#    {_id: 1, host : "mongodb-secondary1:27017"},
+#    {_id: 3, host : "mongodb-secondary2:27017"}]
+# };
+#
+# rs.initiate(config);
+# rs.status();
+
+services:
+    mongodb-primary:
+        image: mongo:latest
+        restart: unless-stopped
+        container_name: mongodb-primary
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+          - MONGODB_REPLICA_SET_MODE=primary
+        volumes:
+          - ./data-rs1:/data/db
+        ports:
+            - 27030:27017
+        command: mongod --noauth --bind_ip=0.0.0.0 --smallfiles --oplogSize 128 --replSet rs0
+
+    mongodb-secondary1:
+        image: mongo:latest
+        depends_on:
+          - mongodb-primary
+        restart: unless-stopped
+        container_name: mongodb-secondary1
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+          - MONGODB_REPLICA_SET_MODE=secondary
+          - MONGODB_PRIMARY_HOST=mongodb-primary:27017
+        volumes:
+          - ./data-rs2:/data/db
+        ports:
+            - 27031:27017
+        command: mongod --noauth --bind_ip=0.0.0.0 --smallfiles --oplogSize 128 --replSet rs0
+
+    mongodb-secondary2:
+        image: mongo:latest
+        depends_on:
+          - mongodb-primary
+        restart: unless-stopped
+        container_name: mongodb-secondary2
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+          - MONGODB_REPLICA_SET_MODE=secondary
+          - MONGODB_PRIMARY_HOST=mongodb-primary:27017
+        volumes:
+          - ./data-rs3:/data/db
+        ports:
+            - 27032:27017
+        command: mongod --noauth --bind_ip=0.0.0.0 --smallfiles --oplogSize 128 --replSet rs0

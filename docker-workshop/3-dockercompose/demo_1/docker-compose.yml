@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  ui:
+    build: ./ui
+    image: webapp-ui:0.0.6
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on: 
+      - api
+    networks:
+      webappnetwork:
+        aliases:
+          - ui
+
+  api:
+    build: ./api
+    image: webapp-api:0.0.5
+    restart: always
+    ports:
+      - "9000:9000"
+    networks:
+      webappnetwork:
+        aliases:
+          - api
+
+networks:
+  webappnetwork:
+    driver: bridge
