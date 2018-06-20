@@ -1,3 +1,3 @@
-### Docker - k8s Workshopo
+### Docker - k8s Workshop
 
 - coming soon
