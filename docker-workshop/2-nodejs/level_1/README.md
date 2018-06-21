@@ -22,3 +22,7 @@ docker run --name rest-api-v1 -d -p 8080:80 node-express-api:0.0.1
 docker stop rest-api-v1
 docker rm rest-api-v1
 ```
+
+## Time to Think 
+### Can you reach the api at localhost:8080/api ?
+**Think** Why you cannot reach the api endpoint ??
