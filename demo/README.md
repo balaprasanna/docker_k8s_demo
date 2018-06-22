@@ -172,6 +172,10 @@ Make sure you are in the right directory.
 docker build -t backend:0.0.2 .
 ```
 
+**Good to have a look at the difference from perevious stage**
+![Diff from pevious stage](backend/backend_container_replace_localhost_container_name.png)
+
+
 - Lets stop already running containers
 
 ```
