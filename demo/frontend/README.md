@@ -43,3 +43,6 @@ Happy hacking!
 
 ```
 
+**NOTE**
+- Instructions to build the frontend image is provide here
+  - [build here](todo-app/README.md)
