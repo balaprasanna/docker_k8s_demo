@@ -215,3 +215,8 @@ Go to this url to explore the API
 
 You will see something like this.
 ![lb](backend/lb1.png)
+
+
+## For this stage. refer to frontend folder
+- [frontend](frontend/)
+- [frontend/todo-app](frontend/todo-app/)
