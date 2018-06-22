@@ -8,8 +8,10 @@ ENV NPM_CONFIG_LOGLEVEL warn
 # Install and configure `serve`.
 RUN npm install -g serve
 
+WORKDIR /app
 # Install all dependencies of the current project.
-COPY package*.json .
+COPY package.json .
+COPY package-lock.json .
 RUN npm install
 
 # Copy all local files into the image.
@@ -20,4 +22,4 @@ RUN npm run build --production
 
 EXPOSE 80
 
-CMD serve -s buil
+CMD serve -s build
