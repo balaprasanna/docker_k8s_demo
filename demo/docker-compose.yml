@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+  backend:
+    build: ./backend
+    image: backend:0.0.2
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - mongodb
+    networks:
+      - app_net
+  # NOTE: check webapp/src/config/config.js => mongodb connection to alias, resolves to docker internal ip address
+  mongodb:
+    image: aashreys/mongo-auth:latest
+    restart: unless-stopped
+    container_name: "mongodb"
+    environment:
+      - AUTH=yes
+      - MONGODB_ADMIN_USER=admin
+      - MONGODB_ADMIN_PASS=admin
+      - MONGODB_APPLICATION_DATABASE=appdb
+      - MONGODB_APPLICATION_USER=root
+      - MONGODB_APPLICATION_PASS=supersecret
+    # volumes:
+    #   - ./mongodb/data/db:/data/db
+    ports:
+        - 27017:27017
+    # command: mongod --noauth --bind_ip=0.0.0.0 --smallfiles --oplogSize 128
+    networks:
+      - app_net
+
+  frontend:
+    build: ./frontend/todo-app
+    image: frontend:0.0.2
+    restart: always
+    # volumes:
+    #   - ./frontend/todo-app:/app
+    ports:
+      - "80:3000"
+    depends_on: 
+      - backend
+
+networks:
+  app_net:
+    driver: bridge
