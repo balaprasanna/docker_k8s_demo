@@ -115,3 +115,92 @@ MongoError: failed to connect to server [localhost:27017] on first connect [Mong
 - Discuss the issue
 - Plan & solve this issue
 
+## The solution is Docker Networking
+
+- Lets create a network namespace
+```
+docker network create app_network
+```
+
+- Lets stop already running containers
+
+```
+docker stop backend
+docker stop mongodb
+docker rm backend
+docker rm mongodb
+```
+
+- Lets re-run our containers under the namespace created
+`app_network`
+
+```
+docker network ls
+```
+```
+$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+f5ee60a87290        app_network         bridge              local
+51492a4b4179        bridge              bridge              local
+f8f2bc4e5123        host                host                local
+22806a478f69        none                null                local
+
+```
+
+- Run DB Container 
+    ```
+    docker run -d --name mongodb --net app_network -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=supersecret -e MONGO_INITDB_DATABASE=appdb mongo
+    ```
+- Run Backend Container    - 
+    ```
+    docker run --name backend --net app_network -p 3000:3000 backend:0.0.1
+    ```
+
+## Stil we have errors.
+
+This is another good chance to show how to rebuild an image and see how it can build the image much faster than the last time.
+
+## Important Section below !!!
+**Fix**
+- We can use this image `aashreys/mongo-auth:latest` instead of `official mongo`
+- You can reach the container using the name of the container.
+- This idea will be carried over to K8S.
+
+
+Make sure you are in the right directory.
+```
+docker build -t backend:0.0.2 .
+```
+
+- Lets stop already running containers
+
+```
+docker stop backend
+docker stop mongodb
+docker rm backend
+docker rm mongodb
+```
+
+#### Run the docker 
+```
+docker run -d --name mongodb \
+--net app_network -p 27017:27017 \
+-e AUTH=yes -e MONGODB_ADMIN_USER=admin \
+-e MONGODB_ADMIN_PASS=admin \
+-e MONGODB_APPLICATION_DATABASE=appdb \
+-e MONGODB_APPLICATION_USER=root \
+-e MONGODB_APPLICATION_PASS=supersecret \
+ aashreys/mongo-auth:latest
+```
+
+```
+docker run --name backend \
+--net app_network \
+-d -p 3000:3000 \
+backend:0.0.2
+```
+
+### WOW. Now we are running two containers.
+1. mongo db container to server as a datastore
+2. backend container to run the node.js application
+3. Both of them are talking to each other in a same network namespace.

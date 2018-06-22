@@ -4,9 +4,9 @@
     "connector": "memory"
   },
   "mongodb": {
-    "host": "localhost",
+    "host": "mongodb",
     "port": 27107,
-    "url": "mongodb://root:supersecret@localhost:27017/database",
+    "url": "mongodb://root:supersecret@mongodb:27017/appdb",
     "database": "appdb",
     "password": "supersecret",
     "name": "mongodb",
