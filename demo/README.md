@@ -204,3 +204,10 @@ backend:0.0.2
 1. mongo db container to server as a datastore
 2. backend container to run the node.js application
 3. Both of them are talking to each other in a same network namespace.
+
+### Explore the API here
+Go to this url to explore the API
+[http://localhost:3000/explorer/#/](http://localhost:3000/explorer/#/)
+
+You will see something like this.
+![](demo/backend/lb1.png)
