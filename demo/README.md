@@ -19,7 +19,8 @@
 
 *Step 2* Build the backend container
 
-- We need to pull the source code from `` branch
+- We need to pull the source code from `stage1-build-backend` branch
+    - [stage1-build-backend](https://github.com/balaprasanna/docker_k8s_workshop/tree/stage1-build-backend/demo)
     - Lets build the backend api image
         ```
         docker build -t backend:0.0.1 .
