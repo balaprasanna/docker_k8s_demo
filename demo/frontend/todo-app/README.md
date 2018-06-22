@@ -8,3 +8,7 @@ docker build -t todoapp:0.0.1 .
 ```
 docker run -d -p 80:80 todoapp:0.0.1
 ```
+
+### Lets Explore
+*Discuss & Show*
+- how to get logs from a running container.

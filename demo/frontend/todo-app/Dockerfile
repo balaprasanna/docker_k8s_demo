@@ -18,10 +18,11 @@ RUN npm install
 COPY . .
 
 # Build for production.
-RUN npm run build --production
+# RUN npm run build --production
 
-WORKDIR ./build
+# WORKDIR ./build
 
-EXPOSE 80
+EXPOSE 3000
 
-CMD ["python2.7" ,"-m" ,"SimpleHTTPServer", "80"]
+# CMD ["python2.7" ,"-m" ,"SimpleHTTPServer", "80"]
+CMD [ "npm start" ]
