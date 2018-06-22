@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongodb": {
+    "host": "localhost",
+    "port": 27107,
+    "url": "mongodb://root:supersecret@localhost:27017/database",
+    "database": "appdb",
+    "password": "supersecret",
+    "name": "mongodb",
+    "user": "root",
+    "connector": "mongodb"
+  }
+}
