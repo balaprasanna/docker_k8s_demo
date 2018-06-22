@@ -22,4 +22,4 @@ RUN npm run build --production
 
 EXPOSE 80
 
-CMD serve -s build
+CMD ["serve" ,"-s" ,"build"]
