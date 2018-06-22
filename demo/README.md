@@ -210,4 +210,4 @@ Go to this url to explore the API
 [http://localhost:3000/explorer/#/](http://localhost:3000/explorer/#/)
 
 You will see something like this.
-![](demo/backend/lb1.png)
+![lb]('./backend/lb1.png')
