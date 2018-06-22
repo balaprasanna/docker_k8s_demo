@@ -5,8 +5,8 @@ FROM node:7.8.0
 # Override the base log level (info).
 ENV NPM_CONFIG_LOGLEVEL warn
 
-# Install and configure `serve`.
 RUN npm install -g serve
+
 
 WORKDIR /app
 # Install all dependencies of the current project.
@@ -20,6 +20,8 @@ COPY . .
 # Build for production.
 RUN npm run build --production
 
+WORKDIR ./build
+
 EXPOSE 80
 
-CMD ["serve" ,"-s" ,"build"]
+CMD ["python2.7" ,"-m" ,"SimpleHTTPServer", "80"]
